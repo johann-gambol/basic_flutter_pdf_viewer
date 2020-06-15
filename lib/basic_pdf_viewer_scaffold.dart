@@ -5,27 +5,31 @@ import 'package:flutter/material.dart';
 
 import 'basicflutterpdfviewer.dart';
 
-class PDFViewerScaffold extends StatefulWidget {
+class PDFViewer extends StatefulWidget {
   final PreferredSizeWidget appBar;
   final String path;
   final bool primary;
   final bool swipeHorizontal;
-  final bool pageSnap;
+  final double topBarHeight;
+  final Color topBarColor;
+  final String topBarText;
 
-  const PDFViewerScaffold({
+  const PDFViewer({
     Key key,
     this.appBar,
     @required this.path,
     this.primary = true,
+    this.topBarHeight,
     this.swipeHorizontal = false,
-    this.pageSnap = false,
+    this.topBarColor = Colors.white,
+    this.topBarText = "Pdf Viewer",
   }) : super(key: key);
 
   @override
   _PDFViewScaffoldState createState() => new _PDFViewScaffoldState();
 }
 
-class _PDFViewScaffoldState extends State<PDFViewerScaffold> {
+class _PDFViewScaffoldState extends State<PDFViewer> {
   final pdfViwerRef = PDFViewerPlugin();
 
   Rect _rect;
@@ -52,7 +56,6 @@ class _PDFViewScaffoldState extends State<PDFViewerScaffold> {
         path: widget.path,
         rect: _rect,
         swipeHorizontal: widget.swipeHorizontal,
-        pageSnap: widget.pageSnap,
       );
     } else {
       final rect = _buildRect(context);
@@ -64,17 +67,32 @@ class _PDFViewScaffoldState extends State<PDFViewerScaffold> {
         });
       }
     }
-    return new Scaffold(
-        appBar: widget.appBar,
-        body: const Center(child: const CircularProgressIndicator()));
+    return Container(
+      height: widget.topBarHeight,
+      color: widget.topBarColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          FlatButton(
+            child: Icon(
+              Icons.arrow_back,
+              color: widget.topBarColor == Colors.white
+                  ? Colors.black87
+                  : widget.topBarColor,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          Text(widget.topBarText),
+        ],
+      ),
+    );
   }
 
   Rect _buildRect(BuildContext context) {
-    final fullscreen = widget.appBar == null;
+    final fullscreen = widget.topBarHeight == null;
     final mediaQuery = MediaQuery.of(context);
     final topPadding = widget.primary ? mediaQuery.padding.top : 0.0;
-    final top =
-        fullscreen ? 0.0 : widget.appBar.preferredSize.height + topPadding;
+    final top = fullscreen ? 0.0 : widget.topBarHeight + topPadding;
     var height = mediaQuery.size.height - top;
     if (height < 0.0) {
       height = 0.0;

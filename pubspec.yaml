@@ -2,8 +2,7 @@ name: basic_flutter_pdf_viewer
 description: A flutter Packager for showing PDF-files on IOS and Android. Based on flutter_full_pdfviewer.
 version: 0.0.1
 author: Johann Gambol
-homepage:
-
+homepage: https://github.com/johann-gambol/basic_flutter_pdfviewer
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
@@ -20,6 +19,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  plugin:
+    androidPackage: com.johanngambol.basicflutterpdfviewer
+    pluginClass: BasicFlutterPdfViewerPlugin
 
   # To add assets to your package, add an assets section, like this:
   # assets:

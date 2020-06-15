@@ -109,6 +109,6 @@ public class BasicFlutterPdfViewerPlugin implements MethodCallHandler, PluginReg
 
     @Override
     public boolean onActivityResult(int i, int i1, Intent intent) {
-        return flutterFullPdfViewerManager != null;
+        return basicFlutterPdfViewerManager != null;
     }
 }

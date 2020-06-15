@@ -62,7 +62,7 @@ public class BasicFlutterPdfViewerPlugin implements MethodCallHandler, PluginReg
         boolean pageSnap = call.argument("pageSnap");
 
         if (basicFlutterPdfViewerManager == null || basicFlutterPdfViewerManager.closed) {
-            basicFlutterPdfViewerManager = new basicFlutterPdfViewerManager(activity);
+            basicFlutterPdfViewerManager = new BasicFlutterPdfViewerManager(activity);
         }
         FrameLayout.LayoutParams params = buildLayoutParams(call);
         activity.addContentView(basicFlutterPdfViewerManager.pdfView, params);

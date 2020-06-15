@@ -92,9 +92,9 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
       child: Scaffold(
         body: Container(
           height: widget.topBarHeight,
-          color: widget.primaryColor ?? Theme.of(context).primaryColor,
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.black12))),
+          decoration: BoxDecoration(
+            color: widget.primaryColor ?? Theme.of(context).primaryColor,
+              border: const Border(bottom: BorderSide(color: Colors.black12))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

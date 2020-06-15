@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import 'basicflutterpdfviewer.dart';
 
-
 import 'dart:io' show Platform;
 
 class PDFViewer extends StatefulWidget {
@@ -54,19 +53,20 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
     pdfViwerRef.dispose();
   }
 
-  Widget pageCount(){
-    return ChangeNotifierProvider(
-      create: (context) => PDFViewerPlugin(),
-      child: Consumer<PDFViewerPlugin>(
-        builder: (context, model, child){
-          return Row(children: <Widget>[
-            Text(model.currentPage.toString()),
-            Text(' / '),
-            Text(model.pageCount.toString())
-          ],);
-        },
-      ),
-    );
+  Widget pageCount() {
+    if (Platform.isAndroid) {
+      return ChangeNotifierProvider(
+        create: (context) => PDFViewerPlugin(),
+        child: Consumer<PDFViewerPlugin>(
+          builder: (context, model, child) {
+            return Text(
+              model.currentPage.toString() + ' / ' + model.pageCount.toString(),
+            );
+          },
+        ),
+      );
+    }
+    return SizedBox();
   }
 
   @override
@@ -93,8 +93,10 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
         body: Container(
           height: widget.topBarHeight,
           color: widget.primaryColor ?? Theme.of(context).primaryColor,
+          decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.black12))),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton(
                 child: Icon(
@@ -103,11 +105,8 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
-              SizedBox(
-                width: 20,
-              ),
               Text(widget.topBarText),
-              Platform.isAndroid ? pageCount() : SizedBox(),
+              pageCount(),
             ],
           ),
         ),

@@ -2,8 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'basicflutterpdfviewer.dart';
+
+
+import 'dart:io' show Platform;
 
 class PDFViewer extends StatefulWidget {
   final PreferredSizeWidget appBar;
@@ -50,6 +54,21 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
     pdfViwerRef.dispose();
   }
 
+  Widget pageCount(){
+    return ChangeNotifierProvider(
+      create: (context) => PDFViewerPlugin(),
+      child: Consumer<PDFViewerPlugin>(
+        builder: (context, model, child){
+          return Row(children: <Widget>[
+            Text(model.currentPage.toString()),
+            Text(' / '),
+            Text(model.pageCount.toString())
+          ],);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_rect == null) {
@@ -75,7 +94,7 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
           height: widget.topBarHeight,
           color: widget.primaryColor ?? Theme.of(context).primaryColor,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               FlatButton(
                 child: Icon(
@@ -84,7 +103,11 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
+              SizedBox(
+                width: 20,
+              ),
               Text(widget.topBarText),
+              Platform.isAndroid ? pageCount() : SizedBox(),
             ],
           ),
         ),

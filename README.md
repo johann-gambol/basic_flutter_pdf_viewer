@@ -1,8 +1,11 @@
 # PDF viewer for flutter
 
 Android and iOS working pdf viewer!
+
 This is a extended Version of the flutter_full_pdf_viewer by Alban Veliu:
+
 https://pub.dev/packages/flutter_full_pdf_viewer
+
 https://github.com/albo1337/flutter_full_pdf_viewer
 
 
@@ -15,7 +18,7 @@ Add this to your package's pubspec.yaml file:
 ```
 dependencies:
     basic_flutter_pdf_viewer:
-        git:
+        git: https://github.com/johann-gambol/basic_flutter_pdfviewer.git
 ```
 
 

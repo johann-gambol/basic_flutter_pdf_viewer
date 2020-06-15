@@ -59,14 +59,13 @@ public class BasicFlutterPdfViewerPlugin implements MethodCallHandler, PluginReg
     private void openPDF(MethodCall call, MethodChannel.Result result) {
         String path = call.argument("path");
         boolean swipeHorizontal = call.argument("swipeHorizontal");
-        boolean pageSnap = call.argument("pageSnap");
 
         if (basicFlutterPdfViewerManager == null || basicFlutterPdfViewerManager.closed) {
             basicFlutterPdfViewerManager = new BasicFlutterPdfViewerManager(activity);
         }
         FrameLayout.LayoutParams params = buildLayoutParams(call);
         activity.addContentView(basicFlutterPdfViewerManager.pdfView, params);
-        basicFlutterPdfViewerManager.openPDF(path, swipeHorizontal, pageSnap);
+        basicFlutterPdfViewerManager.openPDF(path, swipeHorizontal);
         result.success(null);
     }
 

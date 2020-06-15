@@ -40,12 +40,10 @@ class PDFViewerPlugin extends ChangeNotifier {
     }
   }
 
-  Future<Null> launch(
-      {String path, bool swipeHorizontal, bool pageSnap, Rect rect}) async {
+  Future<Null> launch({String path, bool swipeHorizontal, Rect rect}) async {
     final args = <String, dynamic>{
       'path': path,
       'swipeHorizontal': swipeHorizontal,
-      'pageSnap': pageSnap
     };
     if (rect != null) {
       args['rect'] = {

@@ -30,7 +30,7 @@ class BasicFlutterPdfViewerManager implements OnPageChangeListener, OnLoadComple
         this.activity = activity;
     }
 
-    void openPDF(String path, boolean swipeHorizontal, boolean pageSnap) {
+    void openPDF(String path, boolean swipeHorizontal) {
         File file = new File(path);
         pdfView.fromFile(file)
                 .enableSwipe(true)

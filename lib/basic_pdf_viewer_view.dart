@@ -11,7 +11,8 @@ class PDFViewer extends StatefulWidget {
   final bool primary;
   final bool swipeHorizontal;
   final double topBarHeight;
-  final Color topBarColor;
+  final Color primaryColor;
+  final Color accentColor;
   final String topBarText;
 
   const PDFViewer({
@@ -21,7 +22,8 @@ class PDFViewer extends StatefulWidget {
     this.primary = true,
     this.topBarHeight,
     this.swipeHorizontal = false,
-    this.topBarColor = Colors.white,
+    this.primaryColor,
+    this.accentColor,
     this.topBarText = "Pdf Viewer",
   }) : super(key: key);
 
@@ -67,23 +69,25 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
         });
       }
     }
-    return Container(
-      height: widget.topBarHeight,
-      color: widget.topBarColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          FlatButton(
-            child: Icon(
-              Icons.arrow_back,
-              color: widget.topBarColor == Colors.white
-                  ? Colors.black87
-                  : widget.topBarColor,
-            ),
-            onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          height: widget.topBarHeight,
+          color: widget.primaryColor ?? Theme.of(context).primaryColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FlatButton(
+                child: Icon(
+                  Icons.arrow_back,
+                  color: widget.accentColor ?? Theme.of(context).accentColor,
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+              Text(widget.topBarText),
+            ],
           ),
-          Text(widget.topBarText),
-        ],
+        ),
       ),
     );
   }

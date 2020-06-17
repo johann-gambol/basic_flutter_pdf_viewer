@@ -1,7 +1,7 @@
 @import UIKit;
 @import WebKit;
 
-#import "BaiscFlutterPdfViewerPlugin.h"
+#import "BasicFlutterPdfViewerPlugin.h"
 
 @interface BasicFlutterPdfViewerPlugin ()
 @end
@@ -19,7 +19,7 @@
     
     UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
     
-    BasicFlutterPdfViewerPlugin *instance = [[FlutterFullPdfViewerPlugin alloc] initWithViewController:viewController];
+    BasicFlutterPdfViewerPlugin *instance = [[BasicFlutterPdfViewerPlugin alloc] initWithViewController:viewController];
     
     [registrar addMethodCallDelegate:instance channel:channel];
 }

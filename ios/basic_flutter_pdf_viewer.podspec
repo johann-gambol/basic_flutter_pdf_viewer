@@ -17,6 +17,6 @@ A fully functional pdf viewer for both iOS and Android.
   s.dependency 'Flutter'
   s.framework        = 'WebKit'
   
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '8.0'
 end
 

@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A fully functional pdf viewer for both iOS and Android.
                        DESC
-  s.homepage         = 'https://github.com/johann-gambol/basic_flutter_pdfviewer/edit/master/ios/flutter_full_pdf_viewer.podspec'
+  s.homepage         = 'https://github.com/johann-gambol/basic_flutter_pdfviewer'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Johann Gambol' => 'jo.gambol@gmail.com' }
   s.source           = { :path => '.' }

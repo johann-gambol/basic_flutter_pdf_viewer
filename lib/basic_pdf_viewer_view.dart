@@ -36,6 +36,9 @@ class PDFViewer extends StatefulWidget {
 
 class _PDFViewScaffoldState extends State<PDFViewer> {
   final pdfViwerRef = PDFViewerPlugin();
+  static Border borderDivider =
+      Border(bottom: BorderSide(color: Colors.black12));
+  static EdgeInsets topBarPadding = const EdgeInsets.all(8.0);
 
   Rect _rect;
   Timer _resizeTimer;
@@ -53,24 +56,7 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
     pdfViwerRef.dispose();
   }
 
-  Widget pageCount() {
-    if (Platform.isAndroid) {
-      return ChangeNotifierProvider(
-        create: (context) => PDFViewerPlugin(),
-        child: Consumer<PDFViewerPlugin>(
-          builder: (context, model, child) {
-            return Text(
-              model.currentPage.toString() + ' / ' + model.pageCount.toString(),
-            );
-          },
-        ),
-      );
-    }
-    return SizedBox();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  void launchOrResizePDFRect(){
     if (_rect == null) {
       _rect = _buildRect(context);
       pdfViwerRef.launch(
@@ -88,30 +74,6 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
         });
       }
     }
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          height: widget.topBarHeight,
-          decoration: BoxDecoration(
-            color: widget.primaryColor ?? Theme.of(context).primaryColor,
-              border: const Border(bottom: BorderSide(color: Colors.black12))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              FlatButton(
-                child: Icon(
-                  Icons.arrow_back,
-                  color: widget.accentColor ?? Theme.of(context).accentColor,
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
-              Text(widget.topBarText),
-              pageCount(),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Rect _buildRect(BuildContext context) {
@@ -126,4 +88,60 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
 
     return new Rect.fromLTWH(0.0, top, mediaQuery.size.width, height);
   }
+
+  Widget androidPageCounter() {
+    if (Platform.isAndroid) {
+      return ChangeNotifierProvider(
+        create: (context) => PDFViewerPlugin(),
+        child: Consumer<PDFViewerPlugin>(
+          builder: (context, model, child) {
+            return Text(
+              model.currentPage.toString() + ' / ' + model.pageCount.toString(),
+            );
+          },
+        ),
+      );
+    }
+    return SizedBox();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    launchOrResizePDFRect();
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          height: widget.topBarHeight,
+          decoration: BoxDecoration(
+              color: widget.primaryColor ?? Theme.of(context).primaryColor,
+              border: borderDivider),
+          child: Padding(
+            padding: topBarPadding,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: FlatButton(
+                    child: Icon(
+                      Icons.arrow_back,
+                      color:
+                          widget.accentColor ?? Theme.of(context).accentColor,
+                    ),
+                    onPressed: () async {
+                      await pdfViwerRef.close();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Expanded(flex: 6, child: Text(widget.topBarText)),
+                Expanded(flex: 2, child: androidPageCounter()),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }

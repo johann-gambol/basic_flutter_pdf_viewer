@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc:android-pdf-viewer:2.8.2;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 

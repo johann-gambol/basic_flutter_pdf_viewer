@@ -1,8 +1,8 @@
 # PDF viewer for flutter
 
-Android and iOS working pdf viewer!
+Pdf viewer for Android and iOS!
 
-This is a extended Version of the flutter_full_pdf_viewer by Alban Veliu:
+This is an extended Version of the flutter_full_pdf_viewer by Alban Veliu:
 
 https://pub.dev/packages/flutter_full_pdf_viewer
 
@@ -23,7 +23,7 @@ dependencies:
 
 
 
-### 2. Install it
+## 2. Install it
 
 You can install packages from the command line:
 

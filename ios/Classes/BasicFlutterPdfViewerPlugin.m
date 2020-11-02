@@ -1,12 +1,12 @@
 @import UIKit;
 @import WebKit;
 
-#import "FlutterFullPdfViewerPlugin.h"
+#import "BasicFlutterPdfViewerPlugin.h"
 
-@interface FlutterFullPdfViewerPlugin ()
+@interface BasicFlutterPdfViewerPlugin ()
 @end
 
-@implementation FlutterFullPdfViewerPlugin{
+@implementation BasicFlutterPdfViewerPlugin{
     FlutterResult _result;
     UIViewController *_viewController;
     WKWebView *_webView;
@@ -19,7 +19,7 @@
     
     UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
     
-    FlutterFullPdfViewerPlugin *instance = [[FlutterFullPdfViewerPlugin alloc] initWithViewController:viewController];
+    BasicFlutterPdfViewerPlugin *instance = [[BasicFlutterPdfViewerPlugin alloc] initWithViewController:viewController];
     
     [registrar addMethodCallDelegate:instance channel:channel];
 }

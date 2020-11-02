@@ -56,7 +56,7 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
     pdfViwerRef.dispose();
   }
 
-  void launchOrResizePDFRect(){
+  void launchOrResizePDFRect() {
     if (_rect == null) {
       _rect = _buildRect(context);
       pdfViwerRef.launch(
@@ -143,5 +143,4 @@ class _PDFViewScaffoldState extends State<PDFViewer> {
       ),
     );
   }
-
 }
